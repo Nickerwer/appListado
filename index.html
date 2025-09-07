@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gestor de Compras</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <link rel="stylesheet" href="inc/style.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>📋 Gestor de Compras</h1>
+    </header>
+    <nav>
+      <button :class="{ active: vista==='listado' }" @click="vista='listado'">Listado</button>
+      <button :class="{ active: vista==='admin' }" @click="vista='admin'">Administrar</button>
+    </nav>
+
+    <div class="container">
+      <!-- Vista de Administración -->
+      <admin-view v-if="vista==='admin'" 
+                  :nuevo="nuevo" 
+                  @agregar="agregar" 
+                  @exportar="exportarJSON" 
+                  @importar="importarJSON">
+      </admin-view>
+
+      <!-- Vista de Listado -->
+      <listado-view v-if="vista==='listado'" 
+                    :lista="lista" 
+                    :editando="editando" 
+                    @editar="editar" 
+                    @guardarEdicion="guardarEdicion" 
+                    @cancelarEdicion="cancelarEdicion" 
+                    @eliminar="eliminar">
+      </listado-view>
+    </div>
+  </div>
+
+  <script type="module" src="inc/app.js"></script>
+</body>
+</html>
