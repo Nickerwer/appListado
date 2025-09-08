@@ -34,11 +34,14 @@ createApp({
       this.copia = { ...this.lista[index] };
     },
     guardarEdicion() {
+      console.log("guardarEdicion")
       this.guardar();
       this.editando = null;
       this.copia = null;
     },
     cancelarEdicion() {
+      console.log("cancelarEdicion")
+      console.log(this.copia);
       if (this.copia && this.editando !== null) {
         this.lista[this.editando] = { ...this.copia };
       }
@@ -46,6 +49,8 @@ createApp({
       this.copia = null;
     },
     guardar() {
+      console.log("guardar")
+      console.log(this.lista);
       localStorage.setItem("listaCompras", JSON.stringify(this.lista));
     },
     exportarJSON() {
