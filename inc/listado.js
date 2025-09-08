@@ -23,7 +23,7 @@ export default {
 
       <div v-for="(item, index) in lista" :key="index" class="card">
         <!-- Modo edición -->
-        <div v-if="editando === index">
+        <div v-if="editando === index && copia">
           <input v-model.trim="copia.producto" placeholder="Producto" class="input-full">
           <div class="row">
             <input v-model.number="copia.precio" type="number" step="0.01" min="0" placeholder="Precio (€)" class="input-half">
@@ -33,9 +33,7 @@ export default {
           <textarea v-model.trim="copia.observacion" rows="2" placeholder="Observaciones" class="input-full"></textarea>
 
           <div class="actions bottom">
-            <div v-if="editando === index && copia">
-              <button class="success" @click="onGuardar(index)" title="Guardar">✅</button>
-            </div>
+            <button class="success" @click="onGuardar(index)" title="Guardar">✅</button>
             <button class="secondary" @click="onCancelar(index)" title="Cancelar">❌</button>
           </div>
         </div>
