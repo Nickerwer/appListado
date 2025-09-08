@@ -25,31 +25,46 @@ createApp({
       this.nuevo = { producto: "", precio: null, fecha: "", tienda: "", observacion: "" };
       this.vista = "listado";
     },
-    eliminar(index) {
-      this.lista.splice(index, 1);
-      this.guardar();
-    },
     editar(index) {
       console.log("editar", index)
       this.editando = index;
-      this.copia = { ...this.lista[index] }; // se hace la copia para el formulario
+      // copia profunda para no tocar el original mientras editas
+      this.copia = JSON.parse(JSON.stringify(this.lista[index]));
     },
     guardarEdicion(index) {
       console.log("guardarEdicion", index)
-      this.lista[index] = { ...this.copia };  // se reemplaza por la copia editada
+      // tolerante: usa el index emitido o el estado 'editando'
+      const i = Number.isInteger(index) ? index : this.editando;
+      if (!Number.isInteger(i)) return;
+
+      // normaliza tipos si hace falta
+      if (this.copia && this.copia.precio != null) {
+        this.copia.precio = Number(this.copia.precio);
+      }
+
+      // reemplaza el elemento (reactivo en Vue 3)
+      this.lista.splice(i, 1, { ...this.copia });
       this.guardar();
+
       this.editando = null;
       this.copia = null;
     },
     cancelarEdicion(index) {
       console.log("cancelarEdicion", index)
-      // simplemente descarta la copia
+      // no hace falta restaurar nada: nunca tocamos 'lista' durante la edición
       this.editando = null;
       this.copia = null;
     },
+    eliminar(index) {
+      const item = this.lista[index];
+      const mensaje = `¿Seguro que quieres eliminar "${item.producto}"?`;
+      if (confirm(mensaje)) {
+        this.lista.splice(index, 1);
+        this.guardar();
+      }
+    },
     guardar() {
       console.log("guardar")
-      console.log(this.lista);
       localStorage.setItem("listaCompras", JSON.stringify(this.lista));
     },
     exportarJSON() {

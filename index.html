@@ -26,13 +26,13 @@
       </admin-view>
 
       <!-- Vista de Listado -->
-      <listado-view v-if="vista==='listado'" 
-                    :lista="lista" 
-                    :editando="editando" 
+      <listado-view v-if="vista==='listado'"
+                    :lista="lista"
+                    :editando="editando"
                     :copia="copia"
-                    @editar="editar" 
-                    @guardarEdicion="guardarEdicion" 
-                    @cancelarEdicion="cancelarEdicion" 
+                    @editar="editar"
+                    @guardarEdicion="guardarEdicion"
+                    @cancelarEdicion="cancelarEdicion"
                     @eliminar="eliminar">
       </listado-view>
     </div>
