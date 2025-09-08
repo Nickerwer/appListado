@@ -30,23 +30,20 @@ createApp({
       this.guardar();
     },
     editar(index) {
-      console.log("editar")
-      console.log(index)
+      console.log("editar", index)
       this.editando = index;
-      this.copia = { ...this.lista[index] };
+      this.copia = { ...this.lista[index] }; // se hace la copia para el formulario
     },
-    guardarEdicion() {
-      console.log("guardarEdicion")
+    guardarEdicion(index) {
+      console.log("guardarEdicion", index)
+      this.lista[index] = { ...this.copia };  // se reemplaza por la copia editada
       this.guardar();
       this.editando = null;
       this.copia = null;
     },
-    cancelarEdicion() {
-      console.log("cancelarEdicion")
-      console.log(this.copia);
-      if (this.copia && this.editando !== null) {
-        this.lista[this.editando] = { ...this.copia };
-      }
+    cancelarEdicion(index) {
+      console.log("cancelarEdicion", index)
+      // simplemente descarta la copia
       this.editando = null;
       this.copia = null;
     },

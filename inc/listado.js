@@ -19,8 +19,8 @@ export default {
           <textarea v-model="item.observacion" rows="2" placeholder="Observaciones" class="input-full"></textarea>
 
           <div class="actions bottom">
-            <button class="success" @click="$emit('guardarEdicion')" title="Guardar">✅</button>
-            <button class="secondary" @click="$emit('cancelarEdicion')" title="Cancelar">❌</button>
+            <button class="success" @click="$emit('guardarEdicion', index)" title="Guardar">✅</button>
+            <button class="secondary" @click="$emit('cancelarEdicion', index)" title="Cancelar">❌</button>
           </div>
         </div>
 
