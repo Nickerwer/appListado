@@ -31,26 +31,14 @@ createApp({
       this.copia = { ...this.lista[index] }; // copia inicial
     },
     guardarEdicion(index) {
-      console.log("guardarEdicion", index)
-      // tolerante: usa el index emitido o el estado 'editando'
-      const i = Number.isInteger(index) ? index : this.editando;
-      if (!Number.isInteger(i)) return;
-
-      // normaliza tipos si hace falta
-      if (this.copia && this.copia.precio != null) {
-        this.copia.precio = Number(this.copia.precio);
-      }
-
-      // reemplaza el elemento (reactivo en Vue 3)
-      this.lista.splice(i, 1, { ...this.copia });
+      console.log("Padre: guardarEdicion", index);
+      this.lista.splice(index, 1, { ...this.copia });
       this.guardar();
-
       this.editando = null;
       this.copia = null;
     },
     cancelarEdicion(index) {
-      console.log("cancelarEdicion", index)
-      // no hace falta restaurar nada: nunca tocamos 'lista' durante la edición
+      console.log("Padre: cancelarEdicion", index);
       this.editando = null;
       this.copia = null;
     },

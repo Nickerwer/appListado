@@ -4,16 +4,24 @@ export default {
   props: {
     lista: { type: Array, required: true },
     editando: { type: [Number, null], default: null },
-    copia: { type: Object, default: null },
+    copia: { type: Object, default: null }
   },
   emits: ["editar", "guardarEdicion", "cancelarEdicion", "eliminar"],
-  methods: {       
+  methods: {
     onGuardar(index) {
       console.log("Hijo: guardarEdicion emitido", index);
       this.$emit("guardarEdicion", index);
     },
-    //onGuardar(index) { this.$emit("guardarEdicion", index); },
-    onCancelar(index) { this.$emit("cancelarEdicion", index); },
+    onCancelar(index) {
+      console.log("Hijo: cancelarEdicion emitido", index);
+      this.$emit("cancelarEdicion", index);
+    },
+    onEditar(index) {
+      this.$emit("editar", index);
+    },
+    onEliminar(index) {
+      this.$emit("eliminar", index);
+    }
   },
   template: `
     <div>
@@ -41,8 +49,8 @@ export default {
         <!-- Modo lectura -->
         <div v-else>
           <div class="actions top-right">
-            <button class="primary" @click="$emit('editar', index)" title="Editar">✏️</button>
-            <button class="danger" @click="$emit('eliminar', index)" title="Borrar">🗑️</button>
+            <button class="primary" @click="onEditar(index)" title="Editar">✏️</button>
+            <button class="danger" @click="onEliminar(index)" title="Borrar">🗑️</button>
           </div>
           <div class="item-header">{{ item.producto }}</div>
           <div class="chips">
