@@ -7,9 +7,9 @@ export default {
     copia: { type: Object, default: null },
   },
   emits: ["editar", "guardarEdicion", "cancelarEdicion", "eliminar"],
-  methods: {
+  methods: {       
     onGuardar(index) {
-      console.log("Hijo emite guardarEdicion con index", index);
+      console.log("Hijo: guardarEdicion emitido", index);
       this.$emit("guardarEdicion", index);
     },
     //onGuardar(index) { this.$emit("guardarEdicion", index); },
@@ -33,7 +33,9 @@ export default {
           <textarea v-model.trim="copia.observacion" rows="2" placeholder="Observaciones" class="input-full"></textarea>
 
           <div class="actions bottom">
-            <button class="success" @click="onGuardar(index)" title="Guardar">✅</button>
+            <div v-if="editando === index && copia">
+              <button class="success" @click="onGuardar(index)" title="Guardar">✅</button>
+            </div>
             <button class="secondary" @click="onCancelar(index)" title="Cancelar">❌</button>
           </div>
         </div>

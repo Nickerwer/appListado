@@ -28,8 +28,7 @@ createApp({
     editar(index) {
       console.log("editar", index)
       this.editando = index;
-      // copia profunda para no tocar el original mientras editas
-      this.copia = JSON.parse(JSON.stringify(this.lista[index]));
+      this.copia = { ...this.lista[index] }; // copia inicial
     },
     guardarEdicion(index) {
       console.log("guardarEdicion", index)
