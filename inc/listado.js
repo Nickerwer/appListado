@@ -8,7 +8,11 @@ export default {
   },
   emits: ["editar", "guardarEdicion", "cancelarEdicion", "eliminar"],
   methods: {
-    onGuardar(index) { this.$emit("guardarEdicion", index); },
+    onGuardar(index) {
+      console.log("Hijo emite guardarEdicion con index", index);
+      this.$emit("guardarEdicion", index);
+    },
+    //onGuardar(index) { this.$emit("guardarEdicion", index); },
     onCancelar(index) { this.$emit("cancelarEdicion", index); },
   },
   template: `
