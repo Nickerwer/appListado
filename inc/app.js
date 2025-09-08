@@ -30,6 +30,8 @@ createApp({
       this.guardar();
     },
     editar(index) {
+      console.log("editar")
+      console.log(index)
       this.editando = index;
       this.copia = { ...this.lista[index] };
     },
