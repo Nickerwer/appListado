@@ -9,11 +9,11 @@ export default Vue.defineComponent({
   methods: {
     onGuardar(index) {
       console.log("Hijo: guardarEdicion emitido", index);
-      this.$emit("guardarEdicion", index);
+      this.$emit("guardaredicion", index);
     },
     onCancelar(index) {
       console.log("Hijo: cancelarEdicion emitido", index);
-      this.$emit("cancelarEdicion", index);
+      this.$emit("cancelaredicion", index);
     },
   },
   template: `
